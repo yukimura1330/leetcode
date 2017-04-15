@@ -31,6 +31,16 @@ int maxProfit(std::vector<int>& prices) {
     }
     return max_profit;
 }
+//Kadane's Algorithm
+int maxProfitV2(std::vector<int>& prices) {
+    int maxCur = 0, maxSofar = 0;
+    for(int i = 1; i < prices.size(); i++) {
+        maxCur += prices[i] - prices[i-1];
+        maxCur = (maxCur > 0) ? maxCur : 0;
+        maxSofar = (maxCur > maxSofar) ? maxCur : maxSofar;
+    }
+    return maxSofar;
+}
 
 TEST(stock, bestTimeSell) {
     int arr1[] = {7, 1, 5, 8, 6, 4};
@@ -42,6 +52,10 @@ TEST(stock, bestTimeSell) {
     EXPECT_EQ(7, maxProfit(vec1));
     EXPECT_EQ(1, maxProfit(vec2));
     EXPECT_EQ(0, maxProfit(vec3));
+
+    EXPECT_EQ(7, maxProfitV2(vec1));
+    EXPECT_EQ(1, maxProfitV2(vec2));
+    EXPECT_EQ(0, maxProfitV2(vec3));
 }
 
 int main(int argc, char **argv) {
