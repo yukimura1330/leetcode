@@ -31,15 +31,31 @@ std::vector<int> plusOne(std::vector<int>& digits) {
     return digits;
 }
 
+std::vector<int> plusOneV2(std::vector<int>& digits) {
+    int n = digits.size();
+    for (int i = n - 1; i >= 0; --i)
+    {
+        if (digits[i] == 9)
+        {
+            digits[i] = 0;
+        }
+        else
+        {
+            digits[i]++;
+            return digits;
+        }
+    }
+    digits[0] =1;
+    digits.push_back(0);
+    return digits;
+}
+
 int main(int argc, char **argv) {
     int arr1[] = {9, 9, 9, 9, 9, 9};
-    int arr2[] = {9};
-    int arr3[] = {1, 0};
     std::vector<int> vec1(&arr1[0], &arr1[6]);
-    std::vector<int> vec2(&arr2[0], &arr2[1]);
-    std::vector<int> vec3(&arr3[0], &arr3[2]);
     
-    std::vector<int> result = plusOne(vec1);
+    //std::vector<int> result = plusOne(vec1);
+    std::vector<int> result = plusOneV2(vec1);
     for (int i = 0; i < result.size(); i++)
     {
         std::cout << result[i] << " ";
